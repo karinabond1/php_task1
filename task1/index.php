@@ -1,6 +1,6 @@
 <?php
-include 'config.php';
-include 'function.php';
+include_once 'config.php';
+include_once 'function.php';
 
 //print_r($_FILES);
 
@@ -20,7 +20,7 @@ if (isset($_POST['btn_send'])) {
     }
 }
 $arr = make_arr();
-
+$show = "";
 if (isset($_POST["btn_del"])) {
     foreach ($arr as $key => $value) {
         $id = $_REQUEST['id'];
@@ -29,11 +29,13 @@ if (isset($_POST["btn_del"])) {
             $str = $value[0] . "-" . $value[1] . ';';
             $delete_from_file = delete_from_file($str);
             if (!$delete_file && !$delete_from_file) {
-                show();
+                $show=show();
             }
         }
     }
 }
+$arr = make_arr();
+
 include 'templates/index.php';
 
 ?>

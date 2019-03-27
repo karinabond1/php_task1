@@ -1,5 +1,6 @@
 <?php
-$arr = make_arr();
+include_once 'E:/PHP/OSPanel/domains/GFL/php_task1/task1/index.php';
+
 //print_r($arr);?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +43,7 @@ if (!empty($arr)) {
             </td>
         </tr>
     <? }
-
+    echo $show;
     } ?>
 </table>
 

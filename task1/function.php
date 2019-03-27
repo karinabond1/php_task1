@@ -2,12 +2,17 @@
 
 function upload()
 {
-    $file_path = UPLOAD_DIR;
-    $file_name = $_FILES['file_name']['name'];
+    $perm_dir = permision(UPLOAD_DIR);
+    if($perm_dir){
+        $file_path = UPLOAD_DIR;
+        $file_name = $_FILES['file_name']['name'];
 
-    if (move_uploaded_file($_FILES['file_name']['tmp_name'], "$file_path/$file_name")) {
-        return true;
-    } else {
+        if (move_uploaded_file($_FILES['file_name']['tmp_name'], "$file_path/$file_name")) {
+            return true;
+        } else {
+            return false;
+        }
+    }else{
         return false;
     }
 
@@ -15,13 +20,19 @@ function upload()
 
 function delete_file($file_name)
 {
-    $file_path = UPLOAD_DIR;
+    $perm_dir = permision(UPLOAD_DIR);
+    if($perm_dir){
+        $file_path = UPLOAD_DIR;
 
-    if (unlink("$file_path/$file_name")) {
-        return true;
+        if (unlink("$file_path/$file_name")) {
+            return true;
+        } else {
+            return false;
+        }
     } else {
         return false;
     }
+
 
 }
 
@@ -74,22 +85,27 @@ function add_to_file($str)
 
 function make_arr()
 {
-    $current = file_get_contents(FILE_DATA);
-    $arr = array();
-    $temp_arr = array();
-    $arr_all = array();
-    $arr = explode(";", $current);
-    $temp = 1;
-    foreach ($arr as $element) {
-        if (!empty($element)) {
-            $temp_arr[] = $element;
+    $perm_dir = permision(UPLOAD_DIR);
+    if($perm_dir){
+        $current = file_get_contents(FILE_DATA);
+        $arr = array();
+        $temp_arr = array();
+        $arr_all = array();
+        $arr = explode(";", $current);
+        $temp = 1;
+        foreach ($arr as $element) {
+            if (!empty($element)) {
+                $temp_arr[] = $element;
+            }
         }
+        foreach ($temp_arr as $value) {
+            $arr_all[$temp] = explode("-", $value);
+            $temp++;
+        }
+        return $arr_all;
+    }else{
+        return false;
     }
-    foreach ($temp_arr as $value) {
-        $arr_all[$temp] = explode("-", $value);
-        $temp++;
-    }
-    return $arr_all;
 }
 
 function permision($file)
@@ -109,7 +125,7 @@ function permision($file)
 
 function show()
 {
-    echo "Something went wrong!";
+     return "Something went wrong!";
 }
 
 ?>
