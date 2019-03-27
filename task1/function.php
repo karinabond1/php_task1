@@ -92,4 +92,24 @@ function make_arr()
     return $arr_all;
 }
 
+function permision($file)
+{
+    $perm = substr(sprintf('%o', fileperms(UPLOAD_DIR)), -3);
+    if ($perm == 777) {
+        return true;
+    } else {
+        if (chmod($file, 0777)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+function show()
+{
+    echo "Something went wrong!";
+}
+
 ?>

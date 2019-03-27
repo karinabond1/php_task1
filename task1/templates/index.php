@@ -1,8 +1,25 @@
 <?php
 $arr = make_arr();
-//print_r($arr);
+//print_r($arr);?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="../css/global.css" rel="stylesheet" type="text/css">
+    <title>Task 1</title>
+</head>
+<body>
+<form method="post" action="" enctype="multipart/form-data">
+    <input type="file" name="file_name">
+    <input type="submit" name="btn_send">
+</form>
+<?php
 if (!empty($arr)) {
 ?>
+
+
 <table class="table-class">
     <tr>
         <td>№</td>
@@ -28,3 +45,6 @@ if (!empty($arr)) {
 
     } ?>
 </table>
+
+</body>
+</html>

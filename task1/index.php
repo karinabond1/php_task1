@@ -5,15 +5,18 @@ include 'function.php';
 //print_r($_FILES);
 
 if (isset($_POST['btn_send'])) {
+
+    $perm_file = permision(FILE_DATA);
+    $perm_dir = permision(UPLOAD_DIR);
+
     $file_name = $_FILES['file_name']['name'];
     $upload = upload();
-    if (!$upload) {
-        echo "File is not added!";
-    } else {
-        $file_size = get_file_size();
-
+    $file_size = get_file_size();
+    if ($upload && $perm_file && $perm_dir) {
         $str = $file_name . "-" . $file_size;
         add_to_file($str);
+    } else {
+        show();
     }
 }
 $arr = make_arr();
@@ -26,32 +29,11 @@ if (isset($_POST["btn_del"])) {
             $str = $value[0] . "-" . $value[1] . ';';
             $delete_from_file = delete_from_file($str);
             if (!$delete_file && !$delete_from_file) {
-                echo "File is not deleted!";
+                show();
             }
         }
     }
 }
-
+include 'templates/index.php';
 
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="css/global.css" rel="stylesheet" type="text/css">
-    <title>Task 1</title>
-</head>
-<body>
-<form method="post" action="" enctype="multipart/form-data">
-    <input type="file" name="file_name">
-    <input type="submit" name="btn_send">
-</form>
-
-
-<?php include 'templates/index.php'; ?>
-
-
-</body>
-</html>
