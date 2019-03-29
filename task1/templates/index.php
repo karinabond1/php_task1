@@ -1,5 +1,5 @@
 <?php
-include_once 'E:/PHP/OSPanel/domains/GFL/php_task1/task1/index.php';
+include_once '/home/user14/public_html/PHP/php_task1/php_task1/php_task1/task1/index.php';
 
 //print_r($arr);?>
 <!DOCTYPE html>

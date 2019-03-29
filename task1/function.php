@@ -111,10 +111,11 @@ function make_arr()
 function permision($file)
 {
     $perm = substr(sprintf('%o', fileperms(UPLOAD_DIR)), -3);
-    if ($perm == 777) {
+    echo $perm;
+    if ($perm == 775) {
         return true;
     } else {
-        if (chmod($file, 0777)) {
+        if (chmod($file, 777)) {
             return true;
         } else {
             return false;
